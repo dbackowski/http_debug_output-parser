@@ -1,10 +1,10 @@
 # HttpDebugOutput::Parser
 
-HttpDebugOutput::Parser is a Ruby gem designed to parse and transform the debug output from Ruby's Net::HTTP library into a structured, easy-to-read JSON format. This gem is particularly useful for developers who need to analyze HTTP requests and responses in a more human-readable and programmatically accessible format.
+`HttpDebugOutput::Parser` is a Ruby gem designed to parse and transform the debug output from Ruby's Net::HTTP library into a structured, easy-to-read hash. This gem is particularly useful for developers who need to analyze HTTP requests and responses in a more human-readable and programmatically accessible format.
 
 ### Features
 
-* Parses Debug Output: Converts raw Net::HTTP debug output into a structured JSON object.
+* Parses Debug Output: Converts raw Net::HTTP debug output into a structured Hash.
 
 * Request and Response Details: Extracts and organizes details such as HTTP method, path, headers, status codes, and payloads.
 
@@ -13,7 +13,7 @@ HttpDebugOutput::Parser is a Ruby gem designed to parse and transform the debug 
 
 ### Example
 
-Given the raw debug output from Net::HTTP, the gem transforms it into a structured Hash:
+Given the raw debug output from Net::HTTP, the gem transforms it into a structured hash:
 
 ```ruby
 {
