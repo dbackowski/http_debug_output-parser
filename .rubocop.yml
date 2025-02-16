@@ -1,13 +1,12 @@
 AllCops:
-  TargetRubyVersion: 3.0
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
-
-Style/StringLiteralsInInterpolation:
-  Enabled: true
-  EnforcedStyle: double_quotes
+  TargetRubyVersion: 3.2
+  Exclude:
+    - 'rails_simple_event_sourcing.gemspec'
 
 Layout/LineLength:
   Max: 120
+  Exclude:
+    - spec/**/*
+
+Style/Documentation:
+  Enabled: false

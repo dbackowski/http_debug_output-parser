@@ -38,36 +38,43 @@ RSpec.describe HttpDebugOutput::Parser do # rubocop:disable Metrics/BlockLength
 
   let(:expected_output_for_get_request) do # rubocop:disable Metrics/BlockLength
     {
-      request: { method: "GET",
-                 path: "/astros.json",
-                 protocol: "HTTP/1.1",
-                 headers: ["Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3", "Accept: */*", "User-Agent: Ruby", "Connection: close", "Host: api.open-notify.org"],
-                 payload: nil },
-      response: { protocol: "HTTP/1.1",
-                  status: "200",
-                  message: "OK",
-                  headers: ["Server: nginx/1.10.3",
-                            "Date: Thu, 13 Feb 2025 18:58:02 GMT",
-                            "Content-Type: application/json",
-                            "Content-Length: 587",
-                            "Connection: close",
-                            "access-control-allow-origin: *"],
-                  payload: { "people" => [
-                               { "craft" => "ISS", "name" => "Oleg Kononenko" },
-                               { "craft" => "ISS", "name" => "Nikolai Chub"},
-                               { "craft" => "ISS", "name" => "Tracy Caldwell Dyson" },
-                               { "craft" => "ISS", "name" => "Matthew Dominick" },
-                               { "craft" => "ISS", "name" => "Michael Barratt" },
-                               { "craft" => "ISS", "name" => "Jeanette Epps"},
-                               { "craft" => "ISS", "name" => "Alexander Grebenkin"},
-                               { "craft" => "ISS", "name" => "Butch Wilmore" },
-                               { "craft" => "ISS", "name" => "Sunita Williams" },
-                               { "craft" => "Tiangong", "name" => "Li Guangsu" },
-                               { "craft" => "Tiangong", "name" => "Li Cong" },
-                               { "craft" => "Tiangong", "name" => "Ye Guangfu"}
-                             ],
-                             "number" => 12,
-                             "message" => "success" } }
+      request: {
+        method: 'GET',
+        path: '/astros.json',
+        protocol: 'HTTP/1.1',
+        headers: ['Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Accept: */*',
+                  'User-Agent: Ruby', 'Connection: close', 'Host: api.open-notify.org'],
+        payload: nil
+      },
+      response: {
+        protocol: 'HTTP/1.1',
+        status: '200',
+        message: 'OK',
+        headers: ['Server: nginx/1.10.3',
+                  'Date: Thu, 13 Feb 2025 18:58:02 GMT',
+                  'Content-Type: application/json',
+                  'Content-Length: 587',
+                  'Connection: close',
+                  'access-control-allow-origin: *'],
+        payload: {
+          'people' => [
+            { 'craft' => 'ISS', 'name' => 'Oleg Kononenko' },
+            { 'craft' => 'ISS', 'name' => 'Nikolai Chub' },
+            { 'craft' => 'ISS', 'name' => 'Tracy Caldwell Dyson' },
+            { 'craft' => 'ISS', 'name' => 'Matthew Dominick' },
+            { 'craft' => 'ISS', 'name' => 'Michael Barratt' },
+            { 'craft' => 'ISS', 'name' => 'Jeanette Epps' },
+            { 'craft' => 'ISS', 'name' => 'Alexander Grebenkin' },
+            { 'craft' => 'ISS', 'name' => 'Butch Wilmore' },
+            { 'craft' => 'ISS', 'name' => 'Sunita Williams' },
+            { 'craft' => 'Tiangong', 'name' => 'Li Guangsu' },
+            { 'craft' => 'Tiangong', 'name' => 'Li Cong' },
+            { 'craft' => 'Tiangong', 'name' => 'Ye Guangfu' }
+          ],
+          'number' => 12,
+          'message' => 'success'
+        }
+      }
     }
   end
 
@@ -123,47 +130,60 @@ RSpec.describe HttpDebugOutput::Parser do # rubocop:disable Metrics/BlockLength
 
   let(:expected_output_for_post_request) do # rubocop:disable Metrics/BlockLength
     {
-      request: { method: "POST",
-                 path: "/posts",
-                 protocol: "HTTP/1.1",
-                 headers: ["Content-Type: application/json",
-                           "Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-                           "Accept: */*",
-                           "User-Agent: Ruby",
-                           "Connection: close",
-                           "Host: jsonplaceholder.typicode.com",
-                           "Content-Length: 39"],
-                 payload: { "title" => "foo", "body" => "bar", "userId" => 1 } },
-      response: { protocol: "HTTP/1.1",
-                  status: "201",
-                  message: "Created",
-                  headers: ["Date: Fri, 14 Feb 2025 17:15:30 GMT",
-                            "Content-Type: application/json; charset=utf-8",
-                            "Content-Length: 65",
-                            "Connection: close",
-                            "Report-To: {\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1739553330&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=Ec3KKEOMEMmt1G19Qu5Jgre8pqOxKOyal4FPo1Rg3Dc%3D\"}]}",
-                            "Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1739553330&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=Ec3KKEOMEMmt1G19Qu5Jgre8pqOxKOyal4FPo1Rg3Dc%3D",
-                            "Nel: {\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}",
-                            "X-Powered-By: Express",
-                            "X-Ratelimit-Limit: 1000",
-                            "X-Ratelimit-Remaining: 999",
-                            "X-Ratelimit-Reset: 1739553359",
-                            "Vary: Origin, X-HTTP-Method-Override, Accept-Encoding",
-                            "Access-Control-Allow-Credentials: true",
-                            "Cache-Control: no-cache",
-                            "Pragma: no-cache",
-                            "Expires: -1",
-                            "Access-Control-Expose-Headers: Location",
-                            "Location: https://jsonplaceholder.typicode.com/posts/101",
-                            "X-Content-Type-Options: nosniff",
-                            "Etag: W/\"41-GDNaWfnVU6RZhpLbye0veBaqcHA",
-                            "Via: 1.1 vegur",
-                            "cf-cache-status: DYNAMIC",
-                            "Server: cloudflare",
-                            "CF-RAY: 911eb357abdeb194-WAW",
-                            "alt-svc: h3=\":443\"; ma=86400",
-                            "server-timing: cfL4;desc=\"?proto=TCP&rtt=10301&min_rtt=10107&rtt_var=4178&sent=4&recv=7&lost=0&retrans=0&sent_bytes=2793&recv_bytes=894&delivery_rate=248349&cwnd=224&unsent_bytes=0&cid=71366974618887a2&ts=419&x=0"],
-                  payload: { "title" => "foo", "body" => "bar", "userId" => 1, "id" => 101 } }
+      request: {
+        method: 'POST',
+        path: '/posts',
+        protocol: 'HTTP/1.1',
+        headers: ['Content-Type: application/json',
+                  'Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                  'Accept: */*',
+                  'User-Agent: Ruby',
+                  'Connection: close',
+                  'Host: jsonplaceholder.typicode.com',
+                  'Content-Length: 39'],
+        payload: {
+          'title' => 'foo',
+          'body' => 'bar',
+          'userId' => 1
+        }
+      },
+      response: {
+        protocol: 'HTTP/1.1',
+        status: '201',
+        message: 'Created',
+        headers: ['Date: Fri, 14 Feb 2025 17:15:30 GMT',
+                  'Content-Type: application/json; charset=utf-8',
+                  'Content-Length: 65',
+                  'Connection: close',
+                  'Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1739553330&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=Ec3KKEOMEMmt1G19Qu5Jgre8pqOxKOyal4FPo1Rg3Dc%3D"}]}',
+                  'Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1739553330&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=Ec3KKEOMEMmt1G19Qu5Jgre8pqOxKOyal4FPo1Rg3Dc%3D',
+                  'Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}',
+                  'X-Powered-By: Express',
+                  'X-Ratelimit-Limit: 1000',
+                  'X-Ratelimit-Remaining: 999',
+                  'X-Ratelimit-Reset: 1739553359',
+                  'Vary: Origin, X-HTTP-Method-Override, Accept-Encoding',
+                  'Access-Control-Allow-Credentials: true',
+                  'Cache-Control: no-cache',
+                  'Pragma: no-cache',
+                  'Expires: -1',
+                  'Access-Control-Expose-Headers: Location',
+                  'Location: https://jsonplaceholder.typicode.com/posts/101',
+                  'X-Content-Type-Options: nosniff',
+                  'Etag: W/"41-GDNaWfnVU6RZhpLbye0veBaqcHA',
+                  'Via: 1.1 vegur',
+                  'cf-cache-status: DYNAMIC',
+                  'Server: cloudflare',
+                  'CF-RAY: 911eb357abdeb194-WAW',
+                  'alt-svc: h3=":443"; ma=86400',
+                  'server-timing: cfL4;desc="?proto=TCP&rtt=10301&min_rtt=10107&rtt_var=4178&sent=4&recv=7&lost=0&retrans=0&sent_bytes=2793&recv_bytes=894&delivery_rate=248349&cwnd=224&unsent_bytes=0&cid=71366974618887a2&ts=419&x=0'],
+        payload: {
+          'title' => 'foo',
+          'body' => 'bar',
+          'userId' => 1,
+          'id' => 101
+        }
+      }
     }
   end
 
@@ -212,61 +232,65 @@ RSpec.describe HttpDebugOutput::Parser do # rubocop:disable Metrics/BlockLength
 
   let(:expected_output_for_post_request_404) do # rubocop:disable Metrics/BlockLength,Naming/VariableNumber
     {
-      request: { method: "POST",
-                 path: "/posts2",
-                 protocol: "HTTP/1.1",
-                 headers: ["Content-Type: application/json",
-                           "Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-                           "Accept: */*",
-                           "User-Agent: Ruby",
-                           "Connection: close",
-                           "Host: jsonplaceholder.typicode.com",
-                           "Content-Length: 39"],
-                 payload: { "title" => "foo", "body" => "bar", "userId" => 1 } },
-      response: { protocol: "HTTP/1.1",
-                  status: "404",
-                  message: "Not Found",
-                  headers: ["Date: Fri, 14 Feb 2025 17:51:21 GMT",
-                            "Content-Type: application/json; charset=utf-8",
-                            "Content-Length: 2",
-                            "Connection: close",
-                            "Report-To: {\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1739555481&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=lhCsVlX60W0Zz%2BwdMvTPHZ%2BdQ0TtMbZmfArxFAZgAYk%3D\"}]}",
-                            "Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1739555481&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=lhCsVlX60W0Zz%2BwdMvTPHZ%2BdQ0TtMbZmfArxFAZgAYk%3D",
-                            "Nel: {\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}",
-                            "X-Powered-By: Express",
-                            "X-Ratelimit-Limit: 1000",
-                            "X-Ratelimit-Remaining: 999",
-                            "X-Ratelimit-Reset: 1739555519",
-                            "Vary: Origin, X-HTTP-Method-Override, Accept-Encoding",
-                            "Access-Control-Allow-Credentials: true",
-                            "Cache-Control: no-cache",
-                            "Pragma: no-cache",
-                            "Expires: -1",
-                            "X-Content-Type-Options: nosniff",
-                            "Etag: W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8",
-                            "Via: 1.1 vegur",
-                            "cf-cache-status: DYNAMIC",
-                            "Server: cloudflare",
-                            "CF-RAY: 911ee7dd5aafb236-WAW",
-                            "alt-svc: h3=\":443\"; ma=86400",
-                            "server-timing: cfL4;desc=\"?proto=TCP&rtt=13949&min_rtt=11268&rtt_var=6141&sent=5&recv=7&lost=0&retrans=0&sent_bytes=2794&recv_bytes=895&delivery_rate=257011&cwnd=242&unsent_bytes=0&cid=72ecabc4e06ea006&ts=161&x=0"],
-                  payload: {} }
+      request: {
+        method: 'POST',
+        path: '/posts2',
+        protocol: 'HTTP/1.1',
+        headers: ['Content-Type: application/json',
+                  'Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                  'Accept: */*',
+                  'User-Agent: Ruby',
+                  'Connection: close',
+                  'Host: jsonplaceholder.typicode.com',
+                  'Content-Length: 39'],
+        payload: { 'title' => 'foo', 'body' => 'bar', 'userId' => 1 }
+      },
+      response: {
+        protocol: 'HTTP/1.1',
+        status: '404',
+        message: 'Not Found',
+        headers: ['Date: Fri, 14 Feb 2025 17:51:21 GMT',
+                  'Content-Type: application/json; charset=utf-8',
+                  'Content-Length: 2',
+                  'Connection: close',
+                  'Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1739555481&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=lhCsVlX60W0Zz%2BwdMvTPHZ%2BdQ0TtMbZmfArxFAZgAYk%3D"}]}',
+                  'Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1739555481&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=lhCsVlX60W0Zz%2BwdMvTPHZ%2BdQ0TtMbZmfArxFAZgAYk%3D',
+                  'Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}',
+                  'X-Powered-By: Express',
+                  'X-Ratelimit-Limit: 1000',
+                  'X-Ratelimit-Remaining: 999',
+                  'X-Ratelimit-Reset: 1739555519',
+                  'Vary: Origin, X-HTTP-Method-Override, Accept-Encoding',
+                  'Access-Control-Allow-Credentials: true',
+                  'Cache-Control: no-cache',
+                  'Pragma: no-cache',
+                  'Expires: -1',
+                  'X-Content-Type-Options: nosniff',
+                  'Etag: W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8',
+                  'Via: 1.1 vegur',
+                  'cf-cache-status: DYNAMIC',
+                  'Server: cloudflare',
+                  'CF-RAY: 911ee7dd5aafb236-WAW',
+                  'alt-svc: h3=":443"; ma=86400',
+                  'server-timing: cfL4;desc="?proto=TCP&rtt=13949&min_rtt=11268&rtt_var=6141&sent=5&recv=7&lost=0&retrans=0&sent_bytes=2794&recv_bytes=895&delivery_rate=257011&cwnd=242&unsent_bytes=0&cid=72ecabc4e06ea006&ts=161&x=0'],
+        payload: {}
+      }
     }
   end
 
-  it "has a version number" do
+  it 'has a version number' do
     expect(HttpDebugOutput::Parser::VERSION).not_to be nil
   end
 
-  it "parses debug output for GET request (200 response)" do
+  it 'parses debug output for GET request (200 response)' do
     expect(HttpDebugOutput::Parser.new(debug_output_for_get_request).call).to eq(expected_output_for_get_request)
   end
 
-  it "parses debug output for POST request (201 response)" do
+  it 'parses debug output for POST request (201 response)' do
     expect(HttpDebugOutput::Parser.new(debug_output_for_post_request).call).to eq(expected_output_for_post_request)
   end
 
-  it "parses debug output for POST request (404 response)" do
+  it 'parses debug output for POST request (404 response)' do
     expect(HttpDebugOutput::Parser.new(debug_output_for_post_request_404).call).to eq(expected_output_for_post_request_404)
   end
 end
