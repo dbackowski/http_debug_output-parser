@@ -15,7 +15,7 @@ RSpec.describe HttpDebugOutput::Parser do # rubocop:disable Metrics/BlockLength
       -> "access-control-allow-origin: *\r\n"
       -> "\r\n"
       reading 587 bytes...
-      -> "{\"people\": [{\"craft\": \"ISS\", \"name\": \"Oleg Kononenko\"}, {\"craft\": \"ISS\", \"name\": \"Nikolai Chub\"}, {\"craft\": \"ISS\", \"name\": \"Tracy Caldwell Dyson\"}, {\"craft\": \"ISS\", \"name\": \"Matthew Dominick\"}, {\"craft\": \"ISS\", \"name\": \"Michael Barratt\"}, {\"craft\": \"ISS\", \"name\": \"Jeanette Epps\"}, {\"craft\": \"ISS\", \"name\": \"Alexander Grebenkin\"}, {\"craft\": \"ISS\", \"name\": \"Butch Wilmore\"}, {\"craft\": \"ISS\", \"name\": \"Sunita Williams\"}, {\"craft\": \"Tiangong\", \"name\": \"Li Guangsu\"}, {\"craft\": \"Tiangong\", \"name\": \"Li Cong\"}, {\"craft\": \"Tiangong\", \"name\": \"Ye Guangfu\"}], \"number\": 12, \"message\": \"success\"}"
+      -> "{"people": [{"craft": "ISS", "name": "Oleg Kononenko"}, {"craft": "ISS", "name": "Nikolai Chub"}, {"craft": "ISS", "name": "Tracy Caldwell Dyson"}, {"craft": "ISS", "name": "Matthew Dominick"}, {"craft": "ISS", "name": "Michael Barratt"}, {"craft": "ISS", "name": "Jeanette Epps"}, {"craft": "ISS", "name": "Alexander Grebenkin"}, {"craft": "ISS", "name": "Butch Wilmore"}, {"craft": "ISS", "name": "Sunita Williams"}, {"craft": "Tiangong", "name": "Li Guangsu"}, {"craft": "Tiangong", "name": "Li Cong"}, {"craft": "Tiangong", "name": "Ye Guangfu"}], "number": 12, "message": "success"}"
       read 587 bytes
       Conn close
       {"people"=>
@@ -85,15 +85,15 @@ RSpec.describe HttpDebugOutput::Parser do # rubocop:disable Metrics/BlockLength
       starting SSL for jsonplaceholder.typicode.com:443...
       SSL established, protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
       <- "POST /posts HTTP/1.1\r\nContent-Type: application/json\r\nAccept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3\r\nAccept: */*\r\nUser-Agent: Ruby\r\nConnection: close\r\nHost: jsonplaceholder.typicode.com\r\nContent-Length: 39\r\n\r\n"
-      <- "{\"title\":\"foo\",\"body\":\"bar\",\"userId\":1}"
+      <- "{"title":"foo","body":"bar","userId":1}"
       -> "HTTP/1.1 201 Created\r\n"
       -> "Date: Fri, 14 Feb 2025 17:15:30 GMT\r\n"
       -> "Content-Type: application/json; charset=utf-8\r\n"
       -> "Content-Length: 65\r\n"
       -> "Connection: close\r\n"
-      -> "Report-To: {\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1739553330&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=Ec3KKEOMEMmt1G19Qu5Jgre8pqOxKOyal4FPo1Rg3Dc%3D\"}]}\r\n"
+      -> "Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1739553330&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=Ec3KKEOMEMmt1G19Qu5Jgre8pqOxKOyal4FPo1Rg3Dc%3D"}]}\r\n"
       -> "Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1739553330&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=Ec3KKEOMEMmt1G19Qu5Jgre8pqOxKOyal4FPo1Rg3Dc%3D\r\n"
-      -> "Nel: {\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}\r\n"
+      -> "Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}\r\n"
       -> "X-Powered-By: Express\r\n"
       -> "X-Ratelimit-Limit: 1000\r\n"
       -> "X-Ratelimit-Remaining: 999\r\n"
@@ -106,16 +106,16 @@ RSpec.describe HttpDebugOutput::Parser do # rubocop:disable Metrics/BlockLength
       -> "Access-Control-Expose-Headers: Location\r\n"
       -> "Location: https://jsonplaceholder.typicode.com/posts/101\r\n"
       -> "X-Content-Type-Options: nosniff\r\n"
-      -> "Etag: W/\"41-GDNaWfnVU6RZhpLbye0veBaqcHA\"\r\n"
+      -> "Etag: W/"41-GDNaWfnVU6RZhpLbye0veBaqcHA"\r\n"
       -> "Via: 1.1 vegur\r\n"
       -> "cf-cache-status: DYNAMIC\r\n"
       -> "Server: cloudflare\r\n"
       -> "CF-RAY: 911eb357abdeb194-WAW\r\n"
-      -> "alt-svc: h3=\":443\"; ma=86400\r\n"
-      -> "server-timing: cfL4;desc=\"?proto=TCP&rtt=10301&min_rtt=10107&rtt_var=4178&sent=4&recv=7&lost=0&retrans=0&sent_bytes=2793&recv_bytes=894&delivery_rate=248349&cwnd=224&unsent_bytes=0&cid=71366974618887a2&ts=419&x=0\"\r\n"
+      -> "alt-svc: h3=":443"; ma=86400\r\n"
+      -> "server-timing: cfL4;desc="?proto=TCP&rtt=10301&min_rtt=10107&rtt_var=4178&sent=4&recv=7&lost=0&retrans=0&sent_bytes=2793&recv_bytes=894&delivery_rate=248349&cwnd=224&unsent_bytes=0&cid=71366974618887a2&ts=419&x=0"\r\n"
       -> "\r\n"
       reading 65 bytes...
-      -> "{\n  \"title\": \"foo\",\n  \"body\": \"bar\",\n  \"userId\": 1,\n  \"id\": 101\n}"
+      -> "{\n  "title": "foo",\n  "body": "bar",\n  "userId": 1,\n  "id": 101\n}"
       read 65 bytes
       Conn close
       Response code: 201
@@ -194,15 +194,15 @@ RSpec.describe HttpDebugOutput::Parser do # rubocop:disable Metrics/BlockLength
       starting SSL for jsonplaceholder.typicode.com:443...
       SSL established, protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
       <- "POST /posts2 HTTP/1.1\r\nContent-Type: application/json\r\nAccept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3\r\nAccept: */*\r\nUser-Agent: Ruby\r\nConnection: close\r\nHost: jsonplaceholder.typicode.com\r\nContent-Length: 39\r\n\r\n"
-      <- "{\"title\":\"foo\",\"body\":\"bar\",\"userId\":1}"
+      <- "{"title":"foo","body":"bar","userId":1}"
       -> "HTTP/1.1 404 Not Found\r\n"
       -> "Date: Fri, 14 Feb 2025 17:51:21 GMT\r\n"
       -> "Content-Type: application/json; charset=utf-8\r\n"
       -> "Content-Length: 2\r\n"
       -> "Connection: close\r\n"
-      -> "Report-To: {\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1739555481&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=lhCsVlX60W0Zz%2BwdMvTPHZ%2BdQ0TtMbZmfArxFAZgAYk%3D\"}]}\r\n"
+      -> "Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1739555481&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=lhCsVlX60W0Zz%2BwdMvTPHZ%2BdQ0TtMbZmfArxFAZgAYk%3D"}]}\r\n"
       -> "Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1739555481&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&s=lhCsVlX60W0Zz%2BwdMvTPHZ%2BdQ0TtMbZmfArxFAZgAYk%3D\r\n"
-      -> "Nel: {\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}\r\n"
+      -> "Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}\r\n"
       -> "X-Powered-By: Express\r\n"
       -> "X-Ratelimit-Limit: 1000\r\n"
       -> "X-Ratelimit-Remaining: 999\r\n"
@@ -213,13 +213,13 @@ RSpec.describe HttpDebugOutput::Parser do # rubocop:disable Metrics/BlockLength
       -> "Pragma: no-cache\r\n"
       -> "Expires: -1\r\n"
       -> "X-Content-Type-Options: nosniff\r\n"
-      -> "Etag: W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\"\r\n"
+      -> "Etag: W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"\r\n"
       -> "Via: 1.1 vegur\r\n"
       -> "cf-cache-status: DYNAMIC\r\n"
       -> "Server: cloudflare\r\n"
       -> "CF-RAY: 911ee7dd5aafb236-WAW\r\n"
-      -> "alt-svc: h3=\":443\"; ma=86400\r\n"
-      -> "server-timing: cfL4;desc=\"?proto=TCP&rtt=13949&min_rtt=11268&rtt_var=6141&sent=5&recv=7&lost=0&retrans=0&sent_bytes=2794&recv_bytes=895&delivery_rate=257011&cwnd=242&unsent_bytes=0&cid=72ecabc4e06ea006&ts=161&x=0\"\r\n"
+      -> "alt-svc: h3=":443"; ma=86400\r\n"
+      -> "server-timing: cfL4;desc="?proto=TCP&rtt=13949&min_rtt=11268&rtt_var=6141&sent=5&recv=7&lost=0&retrans=0&sent_bytes=2794&recv_bytes=895&delivery_rate=257011&cwnd=242&unsent_bytes=0&cid=72ecabc4e06ea006&ts=161&x=0"\r\n"
       -> "\r\n"
       reading 2 bytes...
       -> "{}"

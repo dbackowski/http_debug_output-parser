@@ -21,9 +21,9 @@ module HttpDebugOutput
     def parse_request # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       request_lines = @debug_output[find_range_for_start_and_end_strings('<- ', '-> ')]
                       .map { |line| clean_line(line.gsub('<- ', '')) }
-      method, path, protocol = request_lines.first.split(' ')
+      method, path, protocol = request_lines.first.split
       headers = request_lines[1..].take_while { |line| line != '' }
-      payload = request_lines[headers.count + 1..].join('')
+      payload = request_lines[headers.count + 1..].join
 
       {
         method:,
@@ -38,9 +38,9 @@ module HttpDebugOutput
       response_lines = @debug_output[find_range_for_start_and_end_strings('-> ', 'read ')]
                        .map { |line| clean_line(line.gsub('-> ', '')) }
                        .filter { |line| line != '' }
-      protocol, status, *message = response_lines.first.split(' ')
+      protocol, status, *message = response_lines.first.split
       headers = response_lines[1..].take_while { |line| !line.start_with?('reading') }
-      payload = response_lines[headers.count + 2..].join('')
+      payload = response_lines[headers.count + 2..].join
 
       {
         protocol:,
