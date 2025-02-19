@@ -1,4 +1,4 @@
-# HttpDebugOutput::Parser
+# HttpDebugOutput::Parser ![tests](https://github.com/dbackowski/http_debug_output-parser/actions/workflows/rspec.yml/badge.svg) ![codecheck](https://github.com/dbackowski/http_debug_output-parser/actions/workflows/rubocop.yml/badge.svg)
 
 `HttpDebugOutput::Parser` is a Ruby gem designed to parse and transform the debug output from Ruby's Net::HTTP library into a structured, easy-to-read hash. This gem is particularly useful for developers who need to analyze HTTP requests and responses in a more human-readable and programmatically accessible format.
 

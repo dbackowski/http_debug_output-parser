@@ -3,6 +3,7 @@ AllCops:
   TargetRubyVersion: 3.2
   Exclude:
     - 'rails_simple_event_sourcing.gemspec'
+    - 'vendor/bundle/**/*'
 
 Layout/LineLength:
   Max: 120
