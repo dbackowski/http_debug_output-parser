@@ -19,7 +19,7 @@ module HttpDebugOutput
     private
 
     def parse_request # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-      request_lines = @debug_output[find_range_for_start_and_end_strings('<- ', '-> ')]
+      request_lines = @debug_output[find_range_for_start_and_end_strings('<- ', '-> ', last_occurence_of_end: false)]
                       .map { |line| clean_line(line.gsub('<- ', '')) }
       method, path, protocol = request_lines.first.split
       headers = request_lines[1..].take_while { |line| line != '' }
@@ -40,7 +40,8 @@ module HttpDebugOutput
                        .filter { |line| line != '' }
       protocol, status, *message = response_lines.first.split
       headers = response_lines[1..].take_while { |line| !line.start_with?('reading') }
-      payload = response_lines[headers.count + 2..].join
+      payload_end_index = response_lines.rindex { |line| line.start_with?('read ') } || response_lines.count
+      payload = response_lines[headers.count + 2..payload_end_index - 1].join
 
       {
         protocol:,
@@ -51,9 +52,10 @@ module HttpDebugOutput
       }
     end
 
-    def find_range_for_start_and_end_strings(start_index_string, end_index_string)
+    def find_range_for_start_and_end_strings(start_index_string, end_index_string, last_occurence_of_end: true)
       start_index = @debug_output.find_index { |line| line.start_with?(start_index_string) }
-      end_index = @debug_output.find_index { |line| line.start_with?(end_index_string) }
+      end_index_method = last_occurence_of_end ? :rindex : :find_index
+      end_index = @debug_output.public_send(end_index_method) { |line| line.start_with?(end_index_string) }
       start_index..end_index - 1
     end
 
